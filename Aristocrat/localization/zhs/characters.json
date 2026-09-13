@@ -1,0 +1,16 @@
+{
+  "ARISTOCRAT.title": "贵族",
+  "ARISTOCRAT.titleObject": "贵族",
+  "ARISTOCRAT.description": "一位将金币、商店、打击与防御化为必然胜利的特权继承者。",
+  "ARISTOCRAT.cardsModifierTitle": "贵族牌",
+  "ARISTOCRAT.cardsModifierDescription": "贵族牌现在会出现在奖励与商店中。",
+  "ARISTOCRAT.eventDeathPrevention": "我的姓氏还不允许我倒在这里。",
+  "ARISTOCRAT.goldMonologue": "[sine]这些金币，本就该流向配得上它们的人。[/sine]",
+  "ARISTOCRAT.aromaPrinciple": "[sine][red]有些位置，生来就是我的。[/red][/sine]",
+  "ARISTOCRAT.pronounSubject": "他",
+  "ARISTOCRAT.pronounObject": "他",
+  "ARISTOCRAT.pronounPossessive": "他的",
+  "ARISTOCRAT.possessiveAdjective": "他的",
+  "ARISTOCRAT.banter.alive.endTurnPing": "快点。",
+  "ARISTOCRAT.banter.dead.endTurnPing": "……"
+}

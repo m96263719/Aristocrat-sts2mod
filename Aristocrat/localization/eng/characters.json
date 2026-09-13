@@ -1,0 +1,16 @@
+{
+  "ARISTOCRAT.title": "The Aristocrat",
+  "ARISTOCRAT.titleObject": "the Aristocrat",
+  "ARISTOCRAT.description": "A privileged heir who turns gold, shops, Strikes and Defends into an inevitable victory.",
+  "ARISTOCRAT.cardsModifierTitle": "Aristocrat Cards",
+  "ARISTOCRAT.cardsModifierDescription": "Aristocrat cards will now appear in rewards and shops.",
+  "ARISTOCRAT.eventDeathPrevention": "My name does not permit me to fall here.",
+  "ARISTOCRAT.goldMonologue": "[sine]This gold was always meant for better hands.[/sine]",
+  "ARISTOCRAT.aromaPrinciple": "[sine][red]Some seats are mine by birth.[/red][/sine]",
+  "ARISTOCRAT.pronounSubject": "he",
+  "ARISTOCRAT.pronounObject": "him",
+  "ARISTOCRAT.pronounPossessive": "his",
+  "ARISTOCRAT.possessiveAdjective": "his",
+  "ARISTOCRAT.banter.alive.endTurnPing": "Make haste.",
+  "ARISTOCRAT.banter.dead.endTurnPing": "..."
+}

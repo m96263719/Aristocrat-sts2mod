@@ -1,0 +1,8 @@
+{
+  "FAMILY_CREST.title": "Family Crest",
+  "FAMILY_CREST.description": "Your first combat is replaced by a shop.\nAfter each elite combat, a shop opens.\nWhenever you visit a shop, gain [blue]50[/blue] gold.",
+  "FAMILY_CREST.flavor": "Closed doors are made for those with the right family name.",
+  "FAMILY_HONOR.title": "Family Honor",
+  "FAMILY_HONOR.description": "Your first combat is replaced by a shop.\nAfter each elite combat, a shop opens.\nShop prices are reduced by [blue]20%[/blue].\nWhenever you visit a shop, gain [blue]100[/blue] gold.",
+  "FAMILY_HONOR.flavor": "Honor is not a title. It is the line on the bill you can always pay."
+}

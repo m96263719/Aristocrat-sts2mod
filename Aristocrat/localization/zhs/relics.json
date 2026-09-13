@@ -1,0 +1,8 @@
+{
+  "FAMILY_CREST.title": "家族纹章",
+  "FAMILY_CREST.description": "第一场战斗被替换为商店。\n精英战斗后开启商店。\n每次访问商店时，获得 [blue]50[/blue] 金币。",
+  "FAMILY_CREST.flavor": "紧闭的门，本就是为拥有正确姓氏的人准备的。",
+  "FAMILY_HONOR.title": "家族荣誉",
+  "FAMILY_HONOR.description": "第一场战斗被替换为商店。\n精英战斗后开启商店。\n商店中的商品价格降低 [blue]20%[/blue]。\n每次访问商店时，获得 [blue]100[/blue] 金币。",
+  "FAMILY_HONOR.flavor": "荣誉不是头衔，是账单上永远付得起的那一行。"
+}

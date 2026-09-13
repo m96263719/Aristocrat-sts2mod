@@ -1,0 +1,16 @@
+# Godot / .NET 的构建产物（都能重新生成，不用传）
+.godot/
+bin/
+obj/
+*.pck
+*.user
+*.bak
+
+# 第三方二进制：BaseLib.dll 由前置 mod 提供，sts2.dll 由游戏本体提供，都不随仓库分发
+libs/*.dll
+
+# 编辑器
+.vs/
+.idea/
+.vscode/
+*.swp

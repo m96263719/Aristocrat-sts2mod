@@ -1,6 +1,6 @@
 {
   "SUPERHUMAN_POWER.title": "Superhuman",
-  "SUPERHUMAN_POWER.description": "Your Strikes and Defends can be upgraded [blue]{Amount}[/blue] additional time(s).",
+  "SUPERHUMAN_POWER.description": "Your Strikes and Defends can be upgraded [blue]{Amount}[/blue] additional {Amount:plural:time|times}.",
   "VASSALS_POWER.title": "Vassals",
   "VASSALS_POWER.description": "This combat, your Strikes and Defends upgrade each time they are used."
 ,
@@ -43,14 +43,14 @@
   "LAW_POWER.description": "Your [gold]Innate[/gold] cards have [gold]Retain[/gold]. Whenever an [gold]Innate[/gold] card is retained, its cost is reduced by [blue]1[/blue]."
 ,
   "NEXT_TURN_DRAW_POWER.title": "Next Turn Draw",
-  "NEXT_TURN_DRAW_POWER.description": "Next turn, draw [blue]{Amount}[/blue] additional card(s).",
+  "NEXT_TURN_DRAW_POWER.description": "Next turn, draw [blue]{Amount}[/blue] additional {Amount:plural:card|cards}.",
   "NEXT_PERK_TRIGGERS_POWER.title": "Born Ruler",
   "NEXT_PERK_TRIGGERS_POWER.description": "The next [gold]Perk[/gold] card you play triggers its [gold]Perk[/gold] an extra time.",
   "PRIDE_FORM_POWER.title": "Pride Form",
-  "PRIDE_FORM_POWER.description": "At the end of each turn, play [blue]{Amount}[/blue] random [gold]Innate[/gold] card(s) from your [gold]Discard Pile[/gold] and [gold]Draw Pile[/gold]."
+  "PRIDE_FORM_POWER.description": "At the end of each turn, play [blue]{Amount}[/blue] random [gold]Innate[/gold] {Amount:plural:card|cards} from your [gold]Discard Pile[/gold] and [gold]Draw Pile[/gold]."
 ,
   "FREE_GIFT_POWER.title": "Free Gift",
-  "FREE_GIFT_POWER.description": "Whenever you play a card with a [gold]Perk[/gold], draw [blue]{Amount}[/blue] card(s).",
+  "FREE_GIFT_POWER.description": "Whenever you play a card with a [gold]Perk[/gold], draw [blue]{Amount}[/blue] {Amount:plural:card|cards}.",
   "ROYAL_GUARD_POWER.title": "Royal Guard",
   "ROYAL_GUARD_POWER.description": "The first [gold]Innate[/gold] card you play manually each turn is played twice."
 }

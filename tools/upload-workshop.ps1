@@ -1,4 +1,4 @@
-# 把这一版发到 Steam 创意工坊（更新已有条目，item id 从工作区的 mod_id.txt 读）。
+﻿# 把这一版发到 Steam 创意工坊（更新已有条目，item id 从工作区的 mod_id.txt 读）。
 #
 # 用法（在工程根目录）：
 #   powershell -ExecutionPolicy Bypass -File tools\upload-workshop.ps1
@@ -42,7 +42,8 @@ if ($Notes -ne "") {
     $jsonPath = Join-Path $WorkspaceDir "workshop.json"
     $json = Get-Content $jsonPath -Raw -Encoding UTF8 | ConvertFrom-Json
     $json.changeNote = $Notes
-    ($json | ConvertTo-Json -Depth 6) | Set-Content $jsonPath -Encoding UTF8
+    # 用不带 BOM 的 UTF-8 写回（Set-Content 在 Windows PowerShell 5.1 下会塞 BOM）
+    [System.IO.File]::WriteAllText($jsonPath, ($json | ConvertTo-Json -Depth 6), (New-Object System.Text.UTF8Encoding($false)))
     Write-Host "   changeNote = $Notes"
 }
 

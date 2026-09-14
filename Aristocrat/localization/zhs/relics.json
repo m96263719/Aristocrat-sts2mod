@@ -24,7 +24,7 @@
   "BLACK_DIAMOND.flavor": "家族之光在漆黑中闪耀时最为昂贵。",
 
   "GOLD_CIRCLET.title": "黄金冠",
-  "GOLD_CIRCLET.description": "即使已被购买，也可能再次出现：每有一顶黄金冠，就有 [blue]5%[/blue] 的概率（上限 [blue]50%[/blue]）把其他的遗物奖励、卡牌奖励或商店遗物替换成黄金冠。\n战斗开始时，随机获得 [blue]2[/blue] 点[gold]力量[/gold]或 [blue]2[/blue] 点[gold]敏捷[/gold]。",
+  "GOLD_CIRCLET.description": "即使已被购买，也仍然可能再次出现。\n战斗开始时，随机获得 [blue]2[/blue] 点[gold]力量[/gold]或 [blue]2[/blue] 点[gold]敏捷[/gold]。",
   "GOLD_CIRCLET.flavor": "也有人说，这不是王冠，而是价签。",
 
   "COIN_BOX.title": "钱币盒",

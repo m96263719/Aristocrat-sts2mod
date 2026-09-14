@@ -36,7 +36,7 @@
   "ARISTOCRAT_DIGNITY.description": "Whenever you play a [gold]Strike[/gold], gain [blue]{MagicNumber:diff()}[/blue] [gold]Block[/gold].\nWhenever you play a [gold]Defend[/gold], deal [blue]{MagicNumber:diff()}[/blue] damage to ALL enemies."
 ,
   "ARISTOCRAT_ATTENDANT.title": "Attendant!",
-  "ARISTOCRAT_ATTENDANT.description": "Gain {Block:diff()} [gold]Block[/gold].\nThis turn, your [gold]Strikes[/gold] and [gold]Defends[/gold] cost [blue]0[/blue].",
+  "ARISTOCRAT_ATTENDANT.description": "Gain {Block:diff()} [gold]Block[/gold].\nThe next [gold]Strike[/gold] or [gold]Defend[/gold] you play costs [blue]0[/blue].",
   "ARISTOCRAT_PROTOCOL.title": "Protocol",
   "ARISTOCRAT_PROTOCOL.description": "Gain {Block:diff()} [gold]Block[/gold].\nThis turn, all [gold]Strikes[/gold] and [gold]Defends[/gold] in your hand gain [gold]Retain[/gold].",
   "ARISTOCRAT_ANCESTRAL_BLOOD.title": "Ancestral Blood",

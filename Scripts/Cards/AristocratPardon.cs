@@ -47,7 +47,8 @@ public sealed class AristocratPardon : AristocratCard, IPerkCard
 
         foreach (CardModel card in chosen.ToList())
         {
-            await CardPileCmd.RemoveFromDeck(card);
+            // showPreview 和本体商店的删牌服务一样（OneOffSynchronizer 里也是这个调用）
+            await CardPileCmd.RemoveFromDeck(card, showPreview: true);
         }
     }
 

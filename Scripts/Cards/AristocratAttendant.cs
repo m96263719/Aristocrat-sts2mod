@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace Aristocrat.Cards;
 
 /// <summary>
-/// 侍从！（1 费，技能，普通）：获得 6 点格挡；本回合内，你下一张打出的打击或防御费用变为 0。升级 格挡+2。
+/// 侍从！（1 费，技能，普通）：获得 6 点格挡；你下一张打出的打击或防御费用变为 0。升级 格挡+2。
 /// 对应塔1 的 aristocrat:Attendant。
 /// </summary>
 public sealed class AristocratAttendant : AristocratCard

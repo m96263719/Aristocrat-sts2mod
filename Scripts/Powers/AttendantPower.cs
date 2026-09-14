@@ -1,10 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,11 +9,12 @@ using MegaCrit.Sts2.Core.Models;
 namespace Aristocrat.Powers;
 
 /// <summary>
-/// 侍从！：本回合内，你的打击与防御费用变为 0（手中已有的和之后抽到的都算）。
+/// 侍从！：你下一张打出的打击或防御费用变为 0。对应塔1 的 NextStrikeDefendFreePower。
 ///
-/// 塔1 的做法是自己记录费用、打出第一张后再手动还原；塔2 有现成的
-/// CardModel.SetToFreeThisTurn()，而且它会在回合结束时自动失效，所以不需要还原逻辑。
-/// 这里从简：整回合内一直生效，回合结束随能力一起消失。
+/// 塔1 是自己记住每张牌原本的费用、打完再手动还原（onAfterUseCard 里 amount--，用完就移除）。
+/// 塔2 有现成的费用钩子（本体的「腐化」也是这么写"技能费用为 0"的），
+/// 所以只需要：层数 > 0 时把打击/防御的费用改成 0，打出一次就减一层，减完移除——
+/// 钩子一撤费用自然就恢复了，不用自己记原值。
 /// </summary>
 public sealed class AttendantPower : PowerModel
 {
@@ -25,54 +22,29 @@ public sealed class AttendantPower : PowerModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override bool TryModifyEnergyCostInCombatLate(CardModel card, decimal originalCost, out decimal modifiedCost)
     {
-        FreeHand();
-        return Task.CompletedTask;
-    }
-
-    public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
-    {
-        if (card.Owner?.Creature == Owner)
+        modifiedCost = originalCost;
+        if (Amount <= 0 || card.Owner?.Creature != Owner || !AristocratCard.IsStrikeOrDefend(card))
         {
-            Free(card);
+            return false;
         }
 
-        return Task.CompletedTask;
+        modifiedCost = 0m;
+        return true;
     }
 
-    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (participants.Any(creature => creature == Owner))
+        if (Amount <= 0 || cardPlay.Card.Owner?.Creature != Owner || !AristocratCard.IsStrikeOrDefend(cardPlay.Card))
+        {
+            return;
+        }
+
+        await PowerCmd.Decrement(this);
+        if (Amount <= 0)
         {
             await PowerCmd.Remove(this);
-        }
-    }
-
-    private void FreeHand()
-    {
-        if (Owner is not { } owner)
-        {
-            return;
-        }
-
-        Player? player = owner.Player;
-        if (player == null)
-        {
-            return;
-        }
-
-        foreach (CardModel card in PileType.Hand.GetPile(player).Cards)
-        {
-            Free(card);
-        }
-    }
-
-    private static void Free(CardModel card)
-    {
-        if (AristocratCard.IsStrikeOrDefend(card))
-        {
-            card.SetToFreeThisTurn();
         }
     }
 }

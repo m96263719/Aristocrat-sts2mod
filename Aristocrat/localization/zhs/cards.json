@@ -36,7 +36,7 @@
   "ARISTOCRAT_DIGNITY.description": "每当你使用[gold]打击[/gold]时，获得[blue]{MagicNumber:diff()}[/blue]点[gold]格挡[/gold]。\n每当你使用[gold]防御[/gold]时，对所有敌人造成[blue]{MagicNumber:diff()}[/blue]点伤害。"
 ,
   "ARISTOCRAT_ATTENDANT.title": "侍从！",
-  "ARISTOCRAT_ATTENDANT.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n本回合内，你的[gold]打击[/gold]与[gold]防御[/gold]费用变为[blue]0[/blue]。",
+  "ARISTOCRAT_ATTENDANT.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n你下一张打出的[gold]打击[/gold]或[gold]防御[/gold]费用变为[blue]0[/blue]。",
   "ARISTOCRAT_PROTOCOL.title": "礼仪程序",
   "ARISTOCRAT_PROTOCOL.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n本回合内，手中所有[gold]打击[/gold]与[gold]防御[/gold]获得[gold]保留[/gold]。",
   "ARISTOCRAT_ANCESTRAL_BLOOD.title": "先祖之血",

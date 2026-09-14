@@ -24,7 +24,7 @@
   "BLACK_DIAMOND.flavor": "A family's light is most expensive when it shines black.",
 
   "GOLD_CIRCLET.title": "Gold Circlet",
-  "GOLD_CIRCLET.description": "Can appear again even if already purchased: for each Gold Circlet you own, there is a [blue]5%[/blue] chance (up to [blue]50%[/blue]) to replace other relic rewards, card rewards, or shop relics with a Gold Circlet.\nAt the start of combat, randomly gain [blue]2[/blue] [gold]Strength[/gold] or [blue]2[/blue] [gold]Dexterity[/gold].",
+  "GOLD_CIRCLET.description": "Can appear again even if already purchased.\nAt the start of combat, randomly gain [blue]2[/blue] [gold]Strength[/gold] or [blue]2[/blue] [gold]Dexterity[/gold].",
   "GOLD_CIRCLET.flavor": "Some say it is not a crown, but a price tag.",
 
   "COIN_BOX.title": "Coin Box",

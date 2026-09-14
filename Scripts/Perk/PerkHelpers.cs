@@ -12,7 +12,11 @@ namespace Aristocrat.Perk;
 /// <summary>特典效果要用到的牌组操作。</summary>
 public static class PerkHelpers
 {
-    /// <summary>往主牌组里加一张牌（可选以升级状态加入）。</summary>
+    /// <summary>
+    /// 往主牌组里加一张牌（可选以升级状态加入）。
+    /// 加完要自己调一次 PreviewCardPileAdd（本体的多利之镜就是这么写的），
+    /// 否则"牌飞进牌组"的预览动画不会播，玩家什么都看不到。
+    /// </summary>
     public static async Task AddCardToDeck<T>(Player player, bool upgraded = false) where T : CardModel
     {
         CardModel card = player.RunState.CreateCard<T>(player);
@@ -21,7 +25,7 @@ public static class PerkHelpers
             CardCmd.Upgrade(card);
         }
 
-        await CardPileCmd.Add(card, PileType.Deck, CardPilePosition.Top, null, false);
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(card, PileType.Deck, CardPilePosition.Top, null, false));
     }
 
     /// <summary>

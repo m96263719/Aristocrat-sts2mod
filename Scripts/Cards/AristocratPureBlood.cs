@@ -48,7 +48,7 @@ public sealed class AristocratPureBlood : AristocratCard, IPerkCard
         }
 
         CardModel reward = owner.RunState.CreateCard(rares[Random.Shared.Next(rares.Count)], owner);
-        await CardPileCmd.Add(reward, PileType.Deck, CardPilePosition.Top, null, false);
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(reward, PileType.Deck, CardPilePosition.Top, null, false));
     }
 
     protected override void OnUpgrade()

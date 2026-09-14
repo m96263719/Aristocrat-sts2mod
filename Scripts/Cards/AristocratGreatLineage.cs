@@ -40,7 +40,8 @@ public sealed class AristocratGreatLineage : AristocratCard
 
         foreach (CardModel card in new[] { strike, defend, wound })
         {
-            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, owner, CardPilePosition.Random);
+            // 洗进抽牌堆也是要预览的（本体的 Metamorphosis / CaptureSpirit 都是这么写的）
+            CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, owner, CardPilePosition.Random));
         }
     }
 

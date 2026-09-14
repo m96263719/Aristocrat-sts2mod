@@ -13,10 +13,15 @@ namespace Aristocrat.Perk;
 ///   前缀 = 命名空间第一段大写 + "-"   →  ARISTOCRAT-
 ///   字段 = Perk 大写                  →  PERK
 /// 所以文本键是 ARISTOCRAT-PERK，对应 localization/{语言}/card_keywords.json。
+///
+/// AutoKeywordPosition 用 None：本体只会自动追加 beforeDescription/afterDescription 里那几个关键词
+/// （虚无 / 保留 / 固有 / 消耗 / 永恒），特典的效果文字本来就写在卡文里（"[gold]特典[/gold]：……"），
+/// 设成 After 的话卡面末尾会再多出一行光秃秃的"特典。"。关键词的悬浮提示不受影响
+/// （CardModel.HoverTips 是按 Keywords 集合给的）。
 /// </summary>
 public class AristocratKeywords
 {
     [CustomEnum(null)]
-    [KeywordProperties(AutoKeywordPosition.After)]
+    [KeywordProperties(AutoKeywordPosition.None)]
     public static CardKeyword Perk;
 }

@@ -1,9 +1,9 @@
 {
   "id": "Aristocrat",
   "name": "贵族 The Aristocrat",
-  "author": "YourName",
-  "description": "把《杀戮尖塔》的贵族 mod 移植到塔2。当前进度：角色 + 全部 80 张卡 + 全部 11 件遗物（含商店机制、特典、先古之民）。原 mod 作者：2D20。",
-  "version": "0.4.0",
+  "author": "秋叶（移植）/ 2D20（原 mod）",
+  "description": "把《杀戮尖塔》的贵族 mod 移植到塔2。角色 + 80 张卡 + 11 件遗物，含商店机制、特典系统、先古之民与中英双语本地化。原 mod 作者：2D20。",
+  "version": "0.5.0",
   "min_game_version": "0.107.1",
   "has_pck": true,
   "has_dll": true,

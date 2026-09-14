@@ -4,5 +4,46 @@
   "FAMILY_CREST.flavor": "Closed doors are made for those with the right family name.",
   "FAMILY_HONOR.title": "Family Honor",
   "FAMILY_HONOR.description": "Your first combat is replaced by a shop.\nAfter each elite combat, a shop opens.\nShop prices are reduced by [blue]20%[/blue].\nWhenever you visit a shop, gain [blue]100[/blue] gold.",
-  "FAMILY_HONOR.flavor": "Honor is not a title. It is the line on the bill you can always pay."
+  "FAMILY_HONOR.flavor": "Honor is not a title. It is the line on the bill you can always pay.",
+
+  "PLATINUM_SHIELD.title": "Platinum Shield",
+  "PLATINUM_SHIELD.description": "[gold]Defends[/gold] grant [blue]3[/blue] additional [gold]Block[/gold].",
+  "PLATINUM_SHIELD.flavor": "Too heavy to shine, too expensive to throw away.",
+
+  "OLD_STATUE.title": "Statue of the Old Era",
+  "OLD_STATUE.description": "At the start of your [blue]4th[/blue] turn, transform all [gold]Strikes[/gold] into [gold]Ultimate Strikes[/gold] for this combat.",
+  "OLD_STATUE.flavor": "It is time.",
+
+  "NOBLE_MARK.title": "Noble Mark",
+  "NOBLE_MARK.description": "At the start of each turn, gain {Energy:energyIcons()}.\nUpon pickup, duplicate [blue]3[/blue] [gold]Strikes[/gold] or [gold]Defends[/gold] in your deck.",
+  "NOBLE_MARK.selectionScreenPrompt": "Choose [gold]Strikes[/gold] or [gold]Defends[/gold] to duplicate.",
+  "NOBLE_MARK.flavor": "Some seals are recognized faster than orders.",
+
+  "BLACK_DIAMOND.title": "Black Diamond",
+  "BLACK_DIAMOND.description": "Upon pickup, upgrade all [gold]Strikes[/gold] and [gold]Defends[/gold].\nWhenever you reach a rest site, add a random [gold]Ultimate Strike[/gold] or [gold]Ultimate Defend[/gold] to your deck.",
+  "BLACK_DIAMOND.flavor": "A family's light is most expensive when it shines black.",
+
+  "GOLD_CIRCLET.title": "Gold Circlet",
+  "GOLD_CIRCLET.description": "Can appear again even if already purchased: for each Gold Circlet you own, there is a [blue]5%[/blue] chance (up to [blue]50%[/blue]) to replace other relic rewards, card rewards, or shop relics with a Gold Circlet.\nAt the start of combat, randomly gain [blue]2[/blue] [gold]Strength[/gold] or [blue]2[/blue] [gold]Dexterity[/gold].",
+  "GOLD_CIRCLET.flavor": "Some say it is not a crown, but a price tag.",
+
+  "COIN_BOX.title": "Coin Box",
+  "COIN_BOX.description": "Upon pickup, obtain an [gold]Old Coin[/gold].\nThe next [blue]2[/blue] relics you obtain are replaced with [gold]Old Coins[/gold].",
+  "COIN_BOX.flavor": "Shake it, and you can hear old wealth clinking together.",
+
+  "BOTTLED_CHAOS.title": "Bottled Chaos",
+  "BOTTLED_CHAOS.description": "Upon pickup, choose a card to bottle.\nAt the start of each combat, the bottled card is in your opening hand.",
+  "BOTTLED_CHAOS.selectionScreenPrompt": "Choose a card to bottle.",
+  "BOTTLED_CHAOS.flavor": "Even if the label falls off, whatever is inside still knows its owner.",
+
+  "BLANK_CHECK.title": "Blank Check",
+  "BLANK_CHECK.description": "Adds a [gold]Gold +15[/gold] option to card rewards.",
+  "BLANK_CHECK.flavor": "It is already signed. Only the amount remains.",
+
+  "VAULT_KEY.title": "Vault Key",
+  "VAULT_KEY.description": "[gold]Rare[/gold] cards you buy in shops gain the [gold]Perk[/gold]: gain a random relic.",
+  "VAULT_KEY.perkText": "[gold]Perk[/gold]: Gain a random relic.",
+  "VAULT_KEY.flavor": "The thing that opens the door is usually more expensive than the door itself.",
+
+  "SEA_GLASS.ARISTOCRAT.title": "Golden Glass"
 }

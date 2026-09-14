@@ -1,6 +1,7 @@
 {
   "ARISTOCRAT.title": "The Aristocrat",
   "ARISTOCRAT.titleObject": "the Aristocrat",
+  "ARISTOCRAT.unlockText": "This character is unlocked by default.",
   "ARISTOCRAT.description": "A privileged heir who turns gold, shops, Strikes and Defends into an inevitable victory.",
   "ARISTOCRAT.cardsModifierTitle": "Aristocrat Cards",
   "ARISTOCRAT.cardsModifierDescription": "Aristocrat cards will now appear in rewards and shops.",

@@ -15,8 +15,8 @@ namespace Aristocrat.Cards;
 /// <summary>
 /// 肖像：给予手牌中 1 张牌「保留」。升级 张数 +1。特典：永久给予牌组中 1 张牌「固有」。
 ///
-/// 注意：塔2 的卡牌存档里没有关键词这一项，所以特典加的固有在同一局内一定有效，
-/// 但如果中途存档读档，这个"永久"的固有可能不会被保留下来（这是塔2 本身的限制）。
+/// 特典给的固有是"永久"的，而塔2 的卡牌存档里没有关键词这一项，
+/// 所以走 PersistentKeywordTracker：加关键词的同时打上存档标记，读档 / 复制 / 降级时再补回来。
 /// </summary>
 public sealed class AristocratPortrait : AristocratCard, IPerkCard
 {
@@ -56,7 +56,7 @@ public sealed class AristocratPortrait : AristocratCard, IPerkCard
 
         foreach (CardModel card in chosen.ToList())
         {
-            CardCmd.ApplyKeyword(card, CardKeyword.Innate);
+            PersistentKeywordTracker.MakePersistentInnate(card);
         }
     }
 

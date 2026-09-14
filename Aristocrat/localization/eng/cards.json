@@ -24,7 +24,7 @@
   "ARISTOCRAT_ESCORT.title": "Escort",
   "ARISTOCRAT_ESCORT.description": "Play all [gold]Strikes[/gold] and [gold]Defends[/gold] in your hand.{IfUpgraded:show:\nDraw [blue]2[/blue] cards first.|}",
   "ARISTOCRAT_CORONATION.title": "Coronation",
-  "ARISTOCRAT_CORONATION.description": "Upgrade all [gold]Strikes[/gold], [gold]Defends[/gold], and [gold]Innate[/gold] cards for this combat."
+  "ARISTOCRAT_CORONATION.description": "Upgrade [gold]Strikes[/gold], [gold]Defends[/gold], [gold]Innate[/gold] cards, and [gold]Perk[/gold] cards for this combat."
 ,
   "ARISTOCRAT_CLASSIC.title": "Classic",
   "ARISTOCRAT_CLASSIC.description": "Draw [blue]{MagicNumber:diff()}[/blue] [gold]Strikes[/gold] and [blue]{MagicNumber:diff()}[/blue] [gold]Defends[/gold] from your draw pile.",

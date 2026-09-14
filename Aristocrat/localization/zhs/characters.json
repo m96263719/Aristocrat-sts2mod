@@ -1,6 +1,7 @@
 {
   "ARISTOCRAT.title": "贵族",
   "ARISTOCRAT.titleObject": "贵族",
+  "ARISTOCRAT.unlockText": "这个角色默认解锁，可以直接选择。",
   "ARISTOCRAT.description": "一位将金币、商店、打击与防御化为必然胜利的特权继承者。",
   "ARISTOCRAT.cardsModifierTitle": "贵族牌",
   "ARISTOCRAT.cardsModifierDescription": "贵族牌现在会出现在奖励与商店中。",

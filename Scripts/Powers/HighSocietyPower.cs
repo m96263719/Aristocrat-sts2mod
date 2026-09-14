@@ -16,8 +16,10 @@ namespace Aristocrat.Powers;
 /// 上流社交界：本场战斗中，你的打击与防御获得消耗；每当一张打击或防御被消耗，
 /// 将一张随机稀有贵族牌加入你的手牌。
 ///
-/// 塔1 用的是 onInitialApplication / onCardDraw / onExhaust 三个时机，塔2 对应
-/// AfterApplied / AfterCardDrawn / AfterCardExhausted。
+/// 关键词用 TryModifyKeywordsInCombat 动态给（本体的「命运之线」HexPower 给牌加虚无也是这么做的）：
+/// 塔1 那边是打在 AbstractCard 上的补丁，所有打击/防御——包括往昔石像变出来的究极打击、
+/// 天命塞进手牌的究极防御——都自动带消耗；如果改成挨个 AddKeyword，
+/// 新生成 / 变化出来的牌就漏掉了（这正是之前的 bug）。
 /// </summary>
 public sealed class HighSocietyPower : PowerModel
 {
@@ -25,26 +27,14 @@ public sealed class HighSocietyPower : PowerModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override bool TryModifyKeywordsInCombat(CardModel card, ISet<CardKeyword> keywords)
     {
-        MarkAll();
-        return Task.CompletedTask;
-    }
-
-    public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
-    {
-        if (card.Owner?.Creature == Owner)
+        if (card.Owner?.Creature != Owner || !AristocratCard.IsStrikeOrDefend(card))
         {
-            Mark(card);
+            return false;
         }
 
-        return Task.CompletedTask;
-    }
-
-    public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        Mark(cardPlay.Card);
-        return Task.CompletedTask;
+        return keywords.Add(CardKeyword.Exhaust);
     }
 
     public override async Task AfterCardExhausted(PlayerChoiceContext choiceContext, CardModel card, bool causedByEthereal)
@@ -73,30 +63,5 @@ public sealed class HighSocietyPower : PowerModel
         Flash();
         CardModel reward = player.Creature.CombatState.CreateCard(rares[Random.Shared.Next(rares.Count)], player);
         await CardPileCmd.AddGeneratedCardToCombat(reward, PileType.Hand, player, CardPilePosition.Top);
-    }
-
-    private void MarkAll()
-    {
-        Player? player = Owner.Player;
-        if (player == null)
-        {
-            return;
-        }
-
-        foreach (PileType pileType in new[] { PileType.Hand, PileType.Draw, PileType.Discard, PileType.Exhaust })
-        {
-            foreach (CardModel card in pileType.GetPile(player).Cards)
-            {
-                Mark(card);
-            }
-        }
-    }
-
-    private static void Mark(CardModel card)
-    {
-        if (AristocratCard.IsStrikeOrDefend(card))
-        {
-            CardCmd.ApplyKeyword(card, CardKeyword.Exhaust);
-        }
     }
 }

@@ -10,7 +10,7 @@ namespace Aristocrat.Cards;
 
 /// <summary>
 /// 加冕（2 费，技能，稀有，固有，消耗）：本场战斗中，把手牌、抽牌堆、弃牌堆里的
-/// 打击、防御和固有牌全部升级。升级后费用降为 1。对应塔1 的 aristocrat:Coronation。
+/// 打击、防御、固有牌和特典牌全部升级。升级后费用降为 1。对应塔1 的 aristocrat:Coronation。
 /// </summary>
 public sealed class AristocratCoronation : AristocratCard
 {
@@ -34,7 +34,10 @@ public sealed class AristocratCoronation : AristocratCard
                     continue;
                 }
 
-                bool shouldUpgrade = IsStrikeOrDefend(card) || HasKeyword(card, CardKeyword.Innate);
+                // 塔1 的判定是 isStrikeOrDefend || isInnate || PerkHelper.hasPerk
+                bool shouldUpgrade = IsStrikeOrDefend(card)
+                    || HasKeyword(card, CardKeyword.Innate)
+                    || IsPerkCard(card);
                 if (shouldUpgrade && card.CurrentUpgradeLevel < card.MaxUpgradeLevel)
                 {
                     CardCmd.Upgrade(card);

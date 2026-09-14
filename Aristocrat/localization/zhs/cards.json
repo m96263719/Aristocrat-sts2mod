@@ -24,7 +24,7 @@
   "ARISTOCRAT_ESCORT.title": "护卫队",
   "ARISTOCRAT_ESCORT.description": "使用手中所有[gold]打击[/gold]与[gold]防御[/gold]。{IfUpgraded:show:\n使用前先抽[blue]2[/blue]张牌。|}",
   "ARISTOCRAT_CORONATION.title": "加冕",
-  "ARISTOCRAT_CORONATION.description": "将[gold]打击[/gold]、[gold]防御[/gold]与[gold]固有[/gold]牌在本场战斗中升级。"
+  "ARISTOCRAT_CORONATION.description": "将[gold]打击[/gold]、[gold]防御[/gold]、[gold]固有[/gold]牌和[gold]特典[/gold]牌在本场战斗中升级。"
 ,
   "ARISTOCRAT_CLASSIC.title": "古典",
   "ARISTOCRAT_CLASSIC.description": "从抽牌堆各抽[blue]{MagicNumber:diff()}[/blue]张[gold]打击[/gold]与[gold]防御[/gold]。",

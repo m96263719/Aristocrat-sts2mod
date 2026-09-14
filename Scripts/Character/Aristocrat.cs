@@ -41,7 +41,10 @@ public sealed class Aristocrat : CharacterModel
 
     public override CardPoolModel CardPool => ModelDb.CardPool<AristocratCardPool>();
 
-    public override RelicPoolModel RelicPool => ModelDb.RelicPool<SharedRelicPool>();
+    /// <summary>
+    /// 贵族的遗物池（自己的 11 件遗物；共享池那部分由 RelicGrabBag 自动拼上）。
+    /// </summary>
+    public override RelicPoolModel RelicPool => ModelDb.RelicPool<AristocratRelicPool>();
 
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<SharedPotionPool>();
 

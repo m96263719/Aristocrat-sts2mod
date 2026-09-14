@@ -30,7 +30,7 @@ public sealed class AristocratLuxuryGoods : AristocratCard
         await CreatureCmd.GainBlock(owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
 
         CardPile hand = PileType.Hand.GetPile(owner);
-        if (!hand.Cards.Any(card => card is IPerkCard))
+        if (!hand.Cards.Any(PerkSystem.HasPerk))
         {
             return;
         }
@@ -40,7 +40,7 @@ public sealed class AristocratLuxuryGoods : AristocratCard
             pile: hand,
             player: owner,
             prefs: new CardSelectorPrefs(SelectionScreenPrompt, 0, 1),
-            filter: card => card is IPerkCard);
+            filter: PerkSystem.HasPerk);
 
         foreach (CardModel card in chosen.ToList())
         {

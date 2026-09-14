@@ -15,12 +15,27 @@ namespace Aristocrat.Powers;
 /// <summary>
 /// 冷静一击：本回合内，你手中的防御费用变为 0，但获得消耗。
 /// 回合结束时随能力一起失效。
+///
+/// [消耗] 同样走 TryModifyKeywordsInCombat（动态关键词），不往牌上加死——
+/// 之前直接 AddKeyword 有两个毛病：变出来的究极防御不带消耗，而且能力到期后
+/// 关键词还留在那张牌上（整场战斗都变成消耗）。
+/// 判定不按牌堆过滤：牌打出去时已经在打出堆里，只认手牌的话消耗就判不出来了。
 /// </summary>
 public sealed class DefendsFreeExhaustPower : PowerModel
 {
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
+
+    public override bool TryModifyKeywordsInCombat(CardModel card, ISet<CardKeyword> keywords)
+    {
+        if (card.Owner?.Creature != Owner || !AristocratCard.IsDefend(card))
+        {
+            return false;
+        }
+
+        return keywords.Add(CardKeyword.Exhaust);
+    }
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
@@ -67,6 +82,5 @@ public sealed class DefendsFreeExhaustPower : PowerModel
         }
 
         card.SetToFreeThisTurn();
-        CardCmd.ApplyKeyword(card, CardKeyword.Exhaust);
     }
 }

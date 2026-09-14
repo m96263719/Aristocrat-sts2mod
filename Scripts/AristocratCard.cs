@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Aristocrat.Character;
+using Aristocrat.Perk;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -73,8 +74,12 @@ public abstract class AristocratCard : CardModel
 
     public static bool HasKeyword(CardModel card, CardKeyword keyword) => card.Keywords.Contains(keyword);
 
-    /// <summary>这张牌是不是带特典的牌（用于「抽一张特典牌」这类效果）。</summary>
-    public static bool IsPerkCard(CardModel card) => card is Perk.IPerkCard;
+    /// <summary>
+    /// 这张牌是不是带特典的牌（用于「抽一张特典牌」这类效果）。
+    /// 判定统一走 <see cref="PerkSystem.HasPerk"/>：除了卡自带的特典，
+    /// 持有宝库钥匙时的稀有牌也算（塔1 的 PerkHelper.hasPerk 就是这么判的）。
+    /// </summary>
+    public static bool IsPerkCard(CardModel card) => PerkSystem.HasPerk(card);
 
     /// <summary>取一个可攻击的敌人，作为自动打出卡牌的目标。</summary>
     public static Creature? PickRandomEnemy(Player player)
@@ -146,5 +151,35 @@ public abstract class AristocratCard : CardModel
                 CardCmd.Upgrade(card);
             }
         }
+    }
+
+    /// <summary>
+    /// 把原牌身上的状态抄到新造的牌上：本地关键词（消耗 / 保留 / 虚无 / 固有……）和附魔。
+    ///
+    /// 为什么需要：「变化成究极打击 / 究极防御」是新建一张牌再把原牌换掉，
+    /// 而塔2 的「上流社交界」是直接往牌上加 [消耗] 关键词（本体的「命运之线」给牌加虚无也是这么做的），
+    /// 不抄过去的话，变出来的究极打击就不带消耗了。
+    /// 只抄 Local（牌自己身上的），全局关键词（由能力动态给的那种）本来就会自动作用到新牌上。
+    ///
+    /// 另外还会把「永久关键词」的存档标记一起带过去（见 PersistentKeywordTracker）：
+    /// 原牌身上如果有肖像特典给的[固有]，变化出来的新牌也要继续存档保留。
+    /// </summary>
+    public static void InheritCardModifiers(CardModel replacement, CardModel original)
+    {
+        foreach (CardKeyword keyword in original.GetKeywordsWithSources(KeywordSources.Local))
+        {
+            replacement.AddKeyword(keyword);
+        }
+
+        if (original.Enchantment is { } enchantment)
+        {
+            EnchantmentModel copy = (EnchantmentModel)enchantment.MutableClone();
+            if (copy.CanEnchant(replacement))
+            {
+                CardCmd.Enchant(copy, replacement, copy.Amount);
+            }
+        }
+
+        PersistentKeywordTracker.CarryOverInnate(original, replacement);
     }
 }

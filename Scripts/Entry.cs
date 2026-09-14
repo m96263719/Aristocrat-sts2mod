@@ -1,9 +1,7 @@
 using System.Reflection;
-using Aristocrat.Relics;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
-using MegaCrit.Sts2.Core.Models.RelicPools;
 
 namespace Aristocrat;
 
@@ -16,19 +14,12 @@ public static class Entry
 
     public static void Init()
     {
-        InstallPatches();
+        // 提前把两个存档字段构造出来：BaseLib 的 SavedSpireField 在构造时就登记自己，
+        // 之后它会把这个名字注册进存档的 net-id 表（联机同步 / 战斗回放要用，不注册会抛异常）。
+        Perk.PersistentKeywordTracker.EnsureRegistered();
+        Perk.VaultKeyPerkTracker.EnsureRegistered();
 
-        try
-        {
-            // 遗物必须属于某个池子。否则游戏在选人、算描述时查 RelicModel.Pool
-            // 会抛 "Sequence contains no matching element"，表现就是"角色选了但没选上"。
-            ModHelper.AddModelToPool<SharedRelicPool, FamilyCrest>();
-            ModHelper.AddModelToPool<SharedRelicPool, FamilyHonor>();
-        }
-        catch (Exception ex)
-        {
-            Log.Error($"[Aristocrat] 遗物注册失败: {ex}");
-        }
+        InstallPatches();
 
         Log.Info("[Aristocrat] 贵族加载完成。");
     }

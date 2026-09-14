@@ -24,15 +24,7 @@ public sealed class AristocratHighSociety : AristocratCard
     {
         Player owner = Owner!;
 
-        // 先给手牌里已有的打防加消耗（其余牌堆由能力的 AfterApplied 处理）
-        foreach (CardModel card in PileType.Hand.GetPile(owner).Cards)
-        {
-            if (IsStrikeOrDefend(card))
-            {
-                CardCmd.ApplyKeyword(card, CardKeyword.Exhaust);
-            }
-        }
-
+        // [消耗] 由 HighSocietyPower 用动态关键词给（新生成 / 变化出来的打防也能吃到）
         await PowerCmd.Apply<HighSocietyPower>(choiceContext, owner.Creature, 1m, owner.Creature, this);
     }
 

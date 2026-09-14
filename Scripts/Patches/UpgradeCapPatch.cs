@@ -24,6 +24,14 @@ internal static class UpgradeCapPatch
     [HarmonyPostfix]
     private static void Postfix(CardModel __instance, ref int __result)
     {
+        // 卡牌总览、奖励预览这些地方用的是"规范模型"（不可变），
+        // 而 CardModel.Owner 的取值会断言实例可变，读一下就抛异常。
+        // 这里先挡掉，否则整个卡牌总览会因为一张牌报错而空白。
+        if (!__instance.IsMutable)
+        {
+            return;
+        }
+
         if (!AristocratCard.IsStrikeOrDefend(__instance))
         {
             return;

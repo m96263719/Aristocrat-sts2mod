@@ -32,7 +32,7 @@ public sealed class AristocratPureBlood : AristocratCard, IPerkCard
             .Targeting(cardPlay.Target!)
             .Execute(choiceContext);
 
-        await DrawMatchingFromDrawPile(choiceContext, owner, 1, card => card is IPerkCard);
+        await DrawMatchingFromDrawPile(choiceContext, owner, 1, PerkSystem.HasPerk);
     }
 
     public async Task OnPerkTriggered(Player owner)

@@ -23,7 +23,7 @@ public sealed class NextPerkTriggersPower : PowerModel
             return;
         }
 
-        if (cardPlay.Card is not IPerkCard perk)
+        if (!PerkSystem.HasPerk(cardPlay.Card))
         {
             return;
         }
@@ -35,7 +35,7 @@ public sealed class NextPerkTriggersPower : PowerModel
         }
 
         Flash();
-        await perk.OnPerkTriggered(player);
+        await PerkSystem.TriggerPerk(cardPlay.Card, player);
 
         await PowerCmd.Decrement(this);
         if (Amount <= 0)

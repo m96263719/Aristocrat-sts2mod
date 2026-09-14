@@ -18,7 +18,7 @@ public sealed class FreeGiftPower : PowerModel
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner?.Creature != Owner || cardPlay.Card is not IPerkCard)
+        if (cardPlay.Card.Owner?.Creature != Owner || !PerkSystem.HasPerk(cardPlay.Card))
         {
             return;
         }

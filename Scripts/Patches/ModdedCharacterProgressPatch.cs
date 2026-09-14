@@ -33,6 +33,16 @@ internal static class ModdedCharacterProgressPatch
     [HarmonyPrefix]
     private static bool BossesPrefix(Player localPlayer) => IsVanillaCharacter(localPlayer);
 
+    /// <summary>
+    /// 首领战结算时本体还会调这个方法：它按"角色 ID 加章节号"去查纪元，
+    /// 比如铁甲战士是 IRONCLAD2_EPOCH / IRONCLAD3_EPOCH……mod 角色没有这套纪元，
+    /// EpochModel.Get 会直接抛 ArgumentException，把结算流程打断——表现就是打完首领卡住、
+    /// 存读档后才能弹出奖励。和上面两个方法一样，mod 角色直接跳过。
+    /// </summary>
+    [HarmonyPatch(typeof(ProgressSaveManager), "ObtainCharUnlockEpoch")]
+    [HarmonyPrefix]
+    private static bool CharUnlockPrefix(Player localPlayer) => IsVanillaCharacter(localPlayer);
+
     private static bool IsVanillaCharacter(Player localPlayer)
     {
         CharacterModel character = localPlayer.Character;

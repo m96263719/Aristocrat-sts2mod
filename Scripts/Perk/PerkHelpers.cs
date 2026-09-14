@@ -29,7 +29,8 @@ public static class PerkHelpers
     ///
     /// 两个要点：
     ///   1. 会继承原牌的升级等级（塔1 的 transformMasterDeckCard 也是这么做的）；
-    ///   2. 具体挑哪张由调用方的 predicate 决定，特典里应该排除"已经是究极版本"的牌，
+    ///   2. 会继承原牌的关键词与附魔（AristocratCard.InheritCardModifiers）；
+    ///   3. 具体挑哪张由调用方的 predicate 决定，特典里应该排除"已经是究极版本"的牌，
     ///      否则会白白变化一张究极牌。
     /// </summary>
     public static async Task<bool> TransformFirstInDeck<T>(Player player, Func<CardModel, bool> predicate) where T : CardModel
@@ -48,6 +49,9 @@ public static class PerkHelpers
         {
             CardCmd.Upgrade(replacement);
         }
+
+        // 关键词 / 附魔也跟着走
+        AristocratCard.InheritCardModifiers(replacement, target);
 
         await CardCmd.Transform(target, replacement);
         return true;

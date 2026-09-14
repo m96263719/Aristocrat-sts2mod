@@ -3,12 +3,20 @@
 # 用法（在工程根目录）：
 #   powershell -ExecutionPolicy Bypass -File tools\upload-workshop.ps1
 #   powershell -ExecutionPolicy Bypass -File tools\upload-workshop.ps1 -Notes "修了 xxx"
+#   powershell -ExecutionPolicy Bypass -File tools\upload-workshop.ps1 -MinBranch public-beta -MaxBranch public-beta
 #
 # 做的事：dotnet build -> ExportPck -> 把 json/dll/pck 拷进工坊工作区 -> 调官方上传器。
 # 上传器需要 Steam 客户端在运行；首次创建条目的步骤见开发笔记「发布」一节。
+#
+# **分支关联默认不碰**：条目现在是「正式版拿旧构建、测试版拿新构建」的分版本状态（见开发笔记「发布」），
+# 关联是在工坊页面的「改动说明」上维护的，所以脚本默认不往 workshop.json 里写 minBranch/maxBranch
+# （按上传器文档：不写 = 不改）。真要脚本代劳时再传 -MinBranch/-MaxBranch，
+# 方向是 public(1) < public-beta(2) < private-beta(3) < dev-test(4)。
 
 param(
-    [string]$Notes = ""
+    [string]$Notes = "",
+    [string]$MinBranch = "",
+    [string]$MaxBranch = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -42,6 +50,11 @@ if ($Notes -ne "") {
     $jsonPath = Join-Path $WorkspaceDir "workshop.json"
     $json = Get-Content $jsonPath -Raw -Encoding UTF8 | ConvertFrom-Json
     $json.changeNote = $Notes
+    if ($MinBranch -ne "" -or $MaxBranch -ne "") {
+        $json | Add-Member -NotePropertyName minBranch -NotePropertyValue $MinBranch -Force
+        $json | Add-Member -NotePropertyName maxBranch -NotePropertyValue $MaxBranch -Force
+        Write-Host "   分支关联: $MinBranch .. $MaxBranch"
+    }
     # 用不带 BOM 的 UTF-8 写回（Set-Content 在 Windows PowerShell 5.1 下会塞 BOM）
     [System.IO.File]::WriteAllText($jsonPath, ($json | ConvertTo-Json -Depth 6), (New-Object System.Text.UTF8Encoding($false)))
     Write-Host "   changeNote = $Notes"

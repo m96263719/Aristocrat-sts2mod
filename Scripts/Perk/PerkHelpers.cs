@@ -57,7 +57,9 @@ public static class PerkHelpers
         // 关键词 / 附魔也跟着走
         AristocratCard.InheritCardModifiers(replacement, target);
 
-        await CardCmd.Transform(target, replacement);
+        // 用「一组变化」这个重载：单张的那个重载本体实现就是转调它，
+        // 而且这个重载在正式版 / 测试版都存在（见开发笔记「测试版分支」）。
+        await CardCmd.Transform(new[] { new CardTransformation(target, replacement) }, null);
         return true;
     }
 

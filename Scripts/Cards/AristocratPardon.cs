@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aristocrat.Compat;
 using Aristocrat.Perk;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
@@ -35,7 +36,7 @@ public sealed class AristocratPardon : AristocratCard, IPerkCard
 
         foreach (CardModel card in chosen.ToList())
         {
-            await CardCmd.Exhaust(choiceContext, card);
+            await BetaCompat.Exhaust(choiceContext, card);
         }
     }
 

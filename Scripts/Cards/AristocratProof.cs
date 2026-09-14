@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using BaseLib.Utils;
 
 namespace Aristocrat.Cards;
 
@@ -40,7 +41,7 @@ public sealed class AristocratProof : AristocratCard
         int damage = (int)DynamicVars.Damage.BaseValue + (int)DynamicVars["MagicNumber"].BaseValue * others;
 
         await DamageCmd.Attack(damage)
-            .FromCard(this)
+            .FromCardCompatibility(this, cardPlay)
             .Targeting(cardPlay.Target!)
             .Execute(choiceContext);
     }

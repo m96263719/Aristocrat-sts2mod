@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using BaseLib.Utils;
 
 namespace Aristocrat.Cards;
 
@@ -31,7 +32,7 @@ public sealed class AristocratStrike : AristocratCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         Player owner = Owner!;
-        AttackCommand command = DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this);
+        AttackCommand command = DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCardCompatibility(this, cardPlay);
 
         if (owner.Creature.GetPowerAmount<MajestyPower>() > 0)
         {

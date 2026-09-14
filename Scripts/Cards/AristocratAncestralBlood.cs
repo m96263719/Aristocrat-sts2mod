@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Aristocrat.Compat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -35,13 +36,13 @@ public sealed class AristocratAncestralBlood : AristocratCard
 
         if (strike != null)
         {
-            await CardCmd.Exhaust(choiceContext, strike);
+            await BetaCompat.Exhaust(choiceContext, strike);
             await PlayerCmd.GainEnergy(1, owner);
         }
 
         if (defend != null)
         {
-            await CardCmd.Exhaust(choiceContext, defend);
+            await BetaCompat.Exhaust(choiceContext, defend);
             await PlayerCmd.GainEnergy(1, owner);
         }
     }

@@ -42,7 +42,7 @@ public sealed class AristocratRampart : AristocratCard
             }
 
             CardModel defend = combat.CreateCard<AristocratDefend>(owner);
-            await CardCmd.Transform(card, defend);
+            await CardCmd.Transform(new[] { new CardTransformation(card, defend) }, null);
         }
     }
 

@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using BaseLib.Utils;
 
 namespace Aristocrat.Cards;
 
@@ -30,7 +31,7 @@ public sealed class AristocratEscortOut : AristocratCard
         }
 
         await DamageCmd.Attack(spent)
-            .FromCard(this)
+            .FromCardCompatibility(this, cardPlay)
             .Targeting(target)
             .Unpowered()
             .Execute(choiceContext);

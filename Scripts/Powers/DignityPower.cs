@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using BaseLib.Utils;
 
 namespace Aristocrat.Powers;
 
@@ -33,7 +34,7 @@ public sealed class DignityPower : PowerModel
         else if (AristocratCard.IsDefend(card))
         {
             await DamageCmd.Attack(Amount)
-                .FromCard(card)
+                .FromCardCompatibility(card, cardPlay)
                 .TargetingAllOpponents(Owner.CombatState!)
                 .Unpowered()
                 .Execute(choiceContext);

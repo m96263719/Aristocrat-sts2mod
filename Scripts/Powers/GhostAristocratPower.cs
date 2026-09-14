@@ -22,14 +22,12 @@ public sealed class GhostAristocratPower : PowerModel
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
-    {
-        return IsOurs(cardSource) ? 2m : 1m;
-    }
+    // 2 倍伤害不在这里 override：正式版 / 测试版的 ModifyDamageMultiplicative 签名不一样
+    // （测试版多一个 CardPlay?），见 Patches/GhostAristocratDamagePatch。
 
     public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource, CardPlay? cardPlay)
     {
-        return IsOurs(cardSource) ? 2m : 1m;
+        return Doubles(cardSource) ? 2m : 1m;
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
@@ -40,7 +38,7 @@ public sealed class GhostAristocratPower : PowerModel
         }
     }
 
-    private bool IsOurs(CardModel? card)
+    internal bool Doubles(CardModel? card)
     {
         return card != null && card.Owner?.Creature == Owner && AristocratCard.IsStrikeOrDefend(card);
     }

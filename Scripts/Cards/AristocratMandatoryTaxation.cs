@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using BaseLib.Utils;
 
 namespace Aristocrat.Cards;
 
@@ -31,7 +32,7 @@ public sealed class AristocratMandatoryTaxation : AristocratCard
         Player owner = Owner!;
 
         var command = DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-            .FromCard(this)
+            .FromCardCompatibility(this, cardPlay)
             .TargetingAllOpponents(owner.Creature.CombatState!);
 
         await command.Execute(choiceContext);

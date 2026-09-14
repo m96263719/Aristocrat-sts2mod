@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Aristocrat.Compat;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -39,6 +40,7 @@ public sealed class VanityPower : PowerModel, IGoldChangedListener
         }
 
         Flash();
-        return CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), enemies, Amount, ValueProp.Unpowered, Owner, null);
+        // 走兼容层：正式版 / 测试版的 CreatureCmd.Damage 参数个数不一样
+        return BetaCompat.Damage(new ThrowingPlayerChoiceContext(), enemies, Amount, ValueProp.Unpowered, Owner, null);
     }
 }

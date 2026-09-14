@@ -11,6 +11,9 @@
     <Sts2Dir>D:\Steam\steamapps\common\Slay the Spire 2</Sts2Dir>
     <Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
     <GodotExe>D:\spire2mod tool\Godot_v4.5.1-stable_mono_win64\Godot_v4.5.1-stable_mono_win64.exe</GodotExe>
+    <!-- 前置 mod BaseLib 的 dll。一份 dll 同时兼容正式版 / 测试版（见开发笔记「测试版分支」），
+         所以这里一般不用改；要临时指向别处的 BaseLib 就 dotnet build -p:BaseLibDll="..." -->
+    <BaseLibDll Condition="'$(BaseLibDll)' == ''">$(MSBuildProjectDirectory)\libs\BaseLib.dll</BaseLibDll>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,7 +28,7 @@
     </Reference>
     <!-- 前置 mod：BaseLib（注册自定义关键词等） -->
     <Reference Include="BaseLib">
-      <HintPath>$(MSBuildProjectDirectory)\libs\BaseLib.dll</HintPath>
+      <HintPath>$(BaseLibDll)</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>

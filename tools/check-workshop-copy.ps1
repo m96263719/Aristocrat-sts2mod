@@ -1,23 +1,24 @@
-﻿# 对比"Steam 下载下来的工坊副本"和"本地构建产物"是否一致。
+﻿# 对比"Steam 下载下来的工坊副本"和"我们最后上传的那份"是否一致。
 #
-# 为什么需要：Steam 客户端那边的内容是**缓存**的，作者自己订阅自己的条目时，
-# 经常出现"工坊页面显示 7.3MB / Updated 刚刚，但本地 workshop\content 里还是老版本"的情况
-# （Steam 复用了订阅时的那份旧 manifest 缓存）。这时候游戏会同时扫到
-# mods\Aristocrat（最新）和 workshop\content\<id>（旧的），很容易以为"没推上去"。
+# 为什么需要：Steam 是按**改动说明里关联的游戏版本**决定给玩家下哪一版的。
+# 如果第一版上传时给改动说明关联了游戏版本、之后的补丁没关联，Steam 检测完游戏版本会一直
+# 拿最早那份关联过的构建 —— 工坊页面上的大小/更新时间是新的，下下来的却是旧内容，
+# 看起来就像"没推上去"。解决办法：在工坊页面把旧改动说明的关联删掉，给最新那条加上关联。
 #
 # 用法（在工程根目录）：
 #   powershell -ExecutionPolicy Bypass -File tools\check-workshop-copy.ps1
-#   powershell -ExecutionPolicy Bypass -File tools\check-workshop-copy.ps1 -WorkshopDir "D:\...\3801464066"
+#   powershell -ExecutionPolicy Bypass -File tools\check-workshop-copy.ps1 -LocalDir "D:\Steam\steamapps\common\Slay the Spire 2\mods\Aristocrat"
 
 param(
     [string]$WorkshopDir = "D:\steam\steamapps\workshop\content\2868840\3801464066",
-    [string]$ModsDir = "D:\Steam\steamapps\common\Slay the Spire 2\mods\Aristocrat"
+    # 默认跟"刚上传的那份"比；也可以指到游戏 mods 目录
+    [string]$LocalDir = "D:\塔2mod制作\workshop\Aristocrat\content"
 )
 
 $ErrorActionPreference = "Stop"
 
-if (-not (Test-Path $WorkshopDir)) { throw "找不到工坊副本目录：$WorkshopDir（说明 Steam 还没下载这条订阅）" }
-if (-not (Test-Path $ModsDir)) { throw "找不到本地构建目录：$ModsDir" }
+if (-not (Test-Path $WorkshopDir)) { throw "找不到工坊副本目录：$WorkshopDir（说明 Steam 还没把这条订阅下载到本地）" }
+if (-not (Test-Path $LocalDir)) { throw "找不到本地对比目录：$LocalDir" }
 
 function Hash($path) { (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash }
 
@@ -25,12 +26,12 @@ $files = @("Aristocrat.json", "Aristocrat.dll", "Aristocrat.pck")
 $allMatch = $true
 
 Write-Host "工坊副本: $WorkshopDir"
-Write-Host "本地构建: $ModsDir"
+Write-Host "本地对比: $LocalDir"
 Write-Host ""
 
 foreach ($name in $files) {
     $w = Join-Path $WorkshopDir $name
-    $l = Join-Path $ModsDir $name
+    $l = Join-Path $LocalDir $name
     $wExists = Test-Path $w
     $lExists = Test-Path $l
 
@@ -56,7 +57,7 @@ foreach ($name in $files) {
 }
 
 # 顺带把两边的 manifest 版本号打出来（版本没改的话游戏内看不出来，容易误判）
-foreach ($pair in @(@("工坊", $WorkshopDir), @("本地", $ModsDir))) {
+foreach ($pair in @(@("工坊", $WorkshopDir), @("本地", $LocalDir))) {
     $jsonPath = Join-Path $pair[1] "Aristocrat.json"
     if (Test-Path $jsonPath) {
         $version = (Get-Content $jsonPath -Raw -Encoding UTF8 | ConvertFrom-Json).version
@@ -66,9 +67,9 @@ foreach ($pair in @(@("工坊", $WorkshopDir), @("本地", $ModsDir))) {
 
 Write-Host ""
 if ($allMatch) {
-    Write-Host "结论：一致，工坊副本就是本地这一版。" -ForegroundColor Green
+    Write-Host "结论：一致，玩家下载到的就是这一版。" -ForegroundColor Green
 } else {
-    Write-Host "结论：不一致。Steam 那份是缓存/旧版，让它重新下载：" -ForegroundColor Yellow
-    Write-Host "  · Steam → 创意工坊页 → 取消订阅，再订阅一次；或"
-    Write-Host "  · 删掉目录 $WorkshopDir 后重启 Steam/游戏，Steam 会重新下载。"
+    Write-Host "结论：不一致。先在工坊页面把旧改动说明的「关联游戏版本」删掉、给最新那条加上，然后：" -ForegroundColor Yellow
+    Write-Host "  · Steam → 该条目 → 取消订阅，再订阅一次；或"
+    Write-Host "  · 删掉目录 $WorkshopDir 后重启 Steam/游戏，让它重新下载。"
 }
